@@ -41,7 +41,9 @@ class Authorship
     @quill.addStyles(styles)
 
   attachButton: (button) ->
-    DOM.addEventListener(button, 'click', =>
+    touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    interaction = if touch then 'tap' else 'click'
+    DOM.addEventListener(button, interaction, =>
       DOM.toggleClass(button, 'ql-on')
       this.enable(DOM.hasClass(button, 'ql-on'))
     )

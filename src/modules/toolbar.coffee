@@ -2,7 +2,6 @@ _     = require('lodash')
 DOM   = require('../dom')
 Utils = require('../utils')
 
-
 class Toolbar
   @DEFAULTS:
     container: null
@@ -51,7 +50,8 @@ class Toolbar
       selector = "select#{selector}"    # Avoid selecting the picker container
       eventName = 'change'
     else
-      eventName = 'click'
+      touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+      eventName = if touch then 'tap' else 'click'
     input = @container.querySelector(selector)
     return unless input?
     @inputs[format] = input

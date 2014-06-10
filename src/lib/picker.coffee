@@ -12,11 +12,13 @@ class Picker
     DOM.addClass(@container, 'ql-picker')
     @select.style.display = 'none'
     @select.parentNode.insertBefore(@container, @select)
-    DOM.addEventListener(@select.ownerDocument, 'click', =>
+    touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    interaction = if touch then 'tap' else 'click'
+    DOM.addEventListener(@select.ownerDocument, interaction, =>
       this.close()
       return true
     )
-    DOM.addEventListener(@label, 'click', =>
+    DOM.addEventListener(@label, interaction, =>
       _.defer( =>
         DOM.toggleClass(@container, 'ql-expanded')
       )
@@ -35,7 +37,10 @@ class Picker
     DOM.addClass(item, 'ql-picker-item')
     DOM.setText(item, DOM.getText(option))
     this.selectItem(item, false) if @select.selectedIndex == index
-    DOM.addEventListener(item, 'click', =>
+    touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    interaction = if touch then 'tap' else 'click'
+
+    DOM.addEventListener(item, interaction, =>
       this.selectItem(item, true)
       this.close()
     )

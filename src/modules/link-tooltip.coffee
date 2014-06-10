@@ -43,8 +43,10 @@ class LinkTooltip extends Tooltip
         @range = null   # Prevent restoring selection to last saved
         this.hide()
     )
-    DOM.addEventListener(@container.querySelector('.done'), 'click', _.bind(this.saveLink, this))
-    DOM.addEventListener(@container.querySelector('.change'), 'click', =>
+    touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    interaction = if touch then 'tap' else 'click'
+    DOM.addEventListener(@container.querySelector('.done'), interaction, _.bind(this.saveLink, this))
+    DOM.addEventListener(@container.querySelector('.change'), interaction, =>
       this.setMode(@link.href, true)
     )
     this.initTextbox(@textbox, this.saveLink, this.hide)
