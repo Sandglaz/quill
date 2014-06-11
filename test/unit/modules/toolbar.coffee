@@ -1,5 +1,6 @@
 describe('Toolbar', ->
   beforeEach( ->
+    @interaction = if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch then 'tap' else 'click'
     @editorContainer = $('#editor-container').html('
       <div>
         <p>
@@ -19,14 +20,14 @@ describe('Toolbar', ->
     it('button add', ->
       range = new Quill.Lib.Range(2, 4)
       @quill.setSelection(range)
-      Quill.DOM.triggerEvent(@button, 'click')
+      Quill.DOM.triggerEvent(@button, @interaction)
       expect(@quill.getContents(range)).toEqualDelta(Tandem.Delta.makeInsertDelta(0, 0, '23', { bold: true }))
     )
 
     it('button remove', ->
       range = new Quill.Lib.Range(0, 2)
       @quill.setSelection(range)
-      Quill.DOM.triggerEvent(@button, 'click')
+      Quill.DOM.triggerEvent(@button, @interaction)
       expect(@quill.getContents(range)).toEqualDelta(Tandem.Delta.makeInsertDelta(0, 0, '01'))
     )
 

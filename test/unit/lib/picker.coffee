@@ -1,5 +1,6 @@
 describe('Picker', ->
   beforeEach( ->
+    @interaction = if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch then 'tap' else 'click'
     @container = $('#editor-container').html(Quill.Normalizer.stripWhitespace('
       <select title="Font" class="ql-font">
         <option value="sans-serif" selected>Sans Serif</option>
@@ -39,7 +40,7 @@ describe('Picker', ->
   )
 
   it('select picker item', ->
-    Quill.DOM.triggerEvent(@container.querySelector('.ql-picker-options').lastChild, 'click')
+    Quill.DOM.triggerEvent(@container.querySelector('.ql-picker-options').lastChild, @interaction)
     expect(Quill.DOM.getText(@picker.label)).toEqual('Monospace')
     _.each(@container.querySelectorAll('.ql-picker-item'), (item, i) ->
       expect(Quill.DOM.hasClass(item, 'ql-selected')).toBe(i == 2)

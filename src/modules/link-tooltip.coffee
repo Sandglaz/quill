@@ -43,7 +43,7 @@ class LinkTooltip extends Tooltip
         @range = null   # Prevent restoring selection to last saved
         this.hide()
     )
-    touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    touch = (("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch)
     interaction = if touch then 'tap' else 'click'
     DOM.addEventListener(@container.querySelector('.done'), interaction, _.bind(this.saveLink, this))
     DOM.addEventListener(@container.querySelector('.change'), interaction, =>

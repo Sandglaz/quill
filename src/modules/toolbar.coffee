@@ -50,8 +50,10 @@ class Toolbar
       selector = "select#{selector}"    # Avoid selecting the picker container
       eventName = 'change'
     else
-      touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
-      eventName = if touch then 'tap' else 'click'
+      if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch
+        eventName = 'tap'
+      else
+        eventName = 'click'
     input = @container.querySelector(selector)
     return unless input?
     @inputs[format] = input

@@ -63,7 +63,7 @@ class ImageTooltip extends Tooltip
     this.initListeners()
 
   initListeners: ->
-    touch = (('ontouchstart' in window) || window.DocumentTouch && document instanceof DocumentTouch)
+    touch = (("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch)
     interaction = if touch then 'tap' else 'click'
     DOM.addEventListener(@container.querySelector('.insert'), interaction, _.bind(this.insertImage, this))
     DOM.addEventListener(@container.querySelector('.cancel'), interaction, _.bind(this.hide, this))
