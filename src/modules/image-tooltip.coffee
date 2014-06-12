@@ -64,9 +64,12 @@ class ImageTooltip extends Tooltip
 
   initListeners: ->
     touch = (("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch)
-    interaction = if touch then 'tap' else 'click'
-    DOM.addEventListener(@container.querySelector('.insert'), interaction, _.bind(this.insertImage, this))
-    DOM.addEventListener(@container.querySelector('.cancel'), interaction, _.bind(this.hide, this))
+    DOM.addEventListener(@container.querySelector('.insert'), 'click', _.bind(this.insertImage, this))
+    DOM.addEventListener(@container.querySelector('.cancel'), 'click', _.bind(this.hide, this))
+    if touch
+      DOM.addEventListener(@container.querySelector('.insert'), 'touchend', _.bind(this.insertImage, this))
+      DOM.addEventListener(@container.querySelector('.cancel'), 'touchend', _.bind(this.hide, this))
+
     DOM.addEventListener(@textbox, 'input', _.bind(this._preview, this))
     this.initTextbox(@textbox, this.insertImage, this.hide)
     @quill.onModuleLoad('toolbar', (toolbar) =>

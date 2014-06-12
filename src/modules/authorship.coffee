@@ -42,11 +42,16 @@ class Authorship
 
   attachButton: (button) ->
     touch = (("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch)
-    interaction = if touch then 'tap' else 'click'
-    DOM.addEventListener(button, interaction, =>
+    DOM.addEventListener(button, 'click', =>
       DOM.toggleClass(button, 'ql-on')
       this.enable(DOM.hasClass(button, 'ql-on'))
     )
+    if touch
+      DOM.addEventListener(button, 'touchend', =>
+        DOM.toggleClass(button, 'ql-on')
+        this.enable(DOM.hasClass(button, 'ql-on'))
+      )
+
 
   enable: (enabled = true) ->
     DOM.toggleClass(@quill.root, 'authorship', enabled)

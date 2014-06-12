@@ -44,9 +44,14 @@ class LinkTooltip extends Tooltip
         this.hide()
     )
     touch = (("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch)
-    interaction = if touch then 'tap' else 'click'
-    DOM.addEventListener(@container.querySelector('.done'), interaction, _.bind(this.saveLink, this))
-    DOM.addEventListener(@container.querySelector('.change'), interaction, =>
+    if touch
+      DOM.addEventListener(@container.querySelector('.done'), 'touchend', _.bind(this.saveLink, this))
+      DOM.addEventListener(@container.querySelector('.change'), 'touchend', =>
+        this.setMode(@link.href, true)
+      )
+
+    DOM.addEventListener(@container.querySelector('.done'), 'click', _.bind(this.saveLink, this))
+    DOM.addEventListener(@container.querySelector('.change'), 'click', =>
       this.setMode(@link.href, true)
     )
     this.initTextbox(@textbox, this.saveLink, this.hide)
