@@ -44,9 +44,7 @@ class Toolbar
         return false
       )
     DOM.addEventListener @container, 'mousedown', =>
-      console.log 'mousedown on toolbar'
       @old_selection = @quill.getSelection()
-      console.log @old_selection
 
   initFormat: (format, callback) ->
     selector = ".ql-#{format}"
@@ -62,15 +60,10 @@ class Toolbar
     return unless input?
     @inputs[format] = input
     toolbar_interaction_callback = =>
-      console.log 'toolbar interaction callback'
-      console.log 'old selection'
-      console.log @old_selection
       value = if eventName == 'change' then DOM.getSelectValue(input) else !DOM.hasClass(input, 'ql-active')
       @preventUpdate = true
       @quill.focus()
-      console.log 'new selection'
       range = @quill.getSelection()
-      console.log(range)
       callback(range, value) if range?
       @preventUpdate = false
       return true
