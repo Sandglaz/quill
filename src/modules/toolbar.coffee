@@ -45,6 +45,7 @@ class Toolbar
       )
     DOM.addEventListener @container, 'mousedown', =>
       @old_selection = @quill.getSelection()
+      return false
 
   initFormat: (format, callback) ->
     selector = ".ql-#{format}"
