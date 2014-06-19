@@ -1,5 +1,5 @@
 switchToEditorFrame = ->
-  browser.driver.switchTo().frame(browser.driver.findElement(By.tagName("iframe")))
+  browser.driver.switchTo().frame(browser.driver.findElement(By.tagName("div")))
 
 describe('Editing text', ->
   browser.driver.get('http://localhost:9000/build/demo/index.html')

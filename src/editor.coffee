@@ -8,12 +8,12 @@ Tandem     = require('tandem-core')
 
 
 class Editor
-  constructor: (@iframeContainer, @quill, @options = {}) ->
-    @renderer = new Renderer(@iframeContainer, @options)
+  constructor: (@container, @quill, @options = {}) ->
+    @renderer = new Renderer(@container, @options)
     @root = @renderer.root
     @doc = new Document(@root, @options)
     @delta = @doc.toDelta()
-    @selection = new Selection(@doc, @renderer.iframe, @quill)
+    @selection = new Selection(@doc, @renderer.editor_container, @quill)
     @timer = setInterval(_.bind(this.checkUpdate, this), @options.pollInterval)
     @quill.on(@quill.constructor.events.SELECTION_CHANGE, (range) =>
       @savedRange = range
@@ -47,7 +47,7 @@ class Editor
       @quill.emit(@quill.constructor.events.TEXT_CHANGE, localDelta, 'user')
 
   checkUpdate: (source = 'user') ->
-    return clearInterval(@timer) if !@renderer.iframe.parentNode? or !@root.parentNode?
+    return clearInterval(@timer) if !@renderer.editor_container.parentNode? or !@root.parentNode?
     delta = this._update()
     if delta
       oldDelta = @delta

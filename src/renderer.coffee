@@ -54,26 +54,15 @@ class Renderer
     ).join("\n")
 
   @buildFrame: (container) ->
-    iframe = container.ownerDocument.createElement('iframe')
-    DOM.setAttributes(iframe,
-      frameBorder: '0'
-      height: '100%'
-      width: '100%'
-      title: 'Quill Rich Text Editor'
-      role: 'presentation'
-    )
-    container.appendChild(iframe)
-    iframeDoc = iframe.contentWindow.document
-    iframeDoc.open()
-    iframeDoc.write('<!DOCTYPE html>')
-    iframeDoc.close()
-    root = iframeDoc.createElement('div')
-    iframeDoc.body.appendChild(root)
-    return [root, iframe]
+    outer_div = container.ownerDocument.createElement('div')
+    editor_div = container.ownerDocument.createElement('div')
+    container.appendChild(outer_div)
+    outer_div.appendChild(editor_div)
+    return [editor_div, outer_div]
 
   constructor: (@container, @options = {}) ->
     @container.innerHTML = ''
-    [@root, @iframe] = Renderer.buildFrame(@container)
+    [@root, @editor_container] = Renderer.buildFrame(@container)
     @root.id = @options.id
     DOM.addClass(@root, 'editor-container')
     DOM.addClass(@container, 'ql-container')
