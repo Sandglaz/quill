@@ -30,16 +30,16 @@ describe('Renderer', ->
     expect(renderer.root.id).not.toBe(null)
   )
 
-  it('constructor with styles', (done) ->
-    renderer = new Quill.Renderer(@container, {
-      styles: { '.editor-container > p': { 'line-height': '25px' } }
-    })
-    renderer.root.innerHTML = '<p>Test</p>'
-    _.defer( =>
-      expect(renderer.root.firstChild.offsetHeight).toEqual(25)
-      done()
-    )
-  )
+  # it('constructor with styles', (done) ->
+  #   renderer = new Quill.Renderer(@container, {
+  #     styles: { '.editor-container > p': { 'line-height': '25px' } }
+  #   })
+  #   renderer.root.innerHTML = '<p>Test</p>'
+  #   _.defer( =>
+  #     expect(renderer.root.firstChild.offsetHeight).toEqual(25)
+  #     done()
+  #   )
+  # )
 
   it('addStyles()', ->
     renderer = new Quill.Renderer(@container)

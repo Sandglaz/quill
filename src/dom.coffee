@@ -107,6 +107,7 @@ DOM =
     node.addEventListener(eventName, (event) ->
       arg = if lastKeyEvent and (eventName == 'keydown' or eventName == 'keyup') then lastKeyEvent else event
       propogate = listener(arg)
+      console.log propogate
       unless propogate
         event.preventDefault()
         event.stopPropagation()

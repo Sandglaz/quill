@@ -69,9 +69,9 @@ class Renderer
     DOM.addEventListener(@container, 'focus', =>
       @root.focus()
     )
-    this.addStyles(DEFAULT_STYLES)
-    # Ensure user specified styles are added after modules'
-    _.defer(_.bind(this.addStyles, this, @options.styles)) if @options.styles?
+    # this.addStyles(DEFAULT_STYLES)
+    # # Ensure user specified styles are added after modules'
+    # _.defer(_.bind(this.addStyles, this, @options.styles)) if @options.styles?
 
   addContainer: (className, before = false) ->
     refNode = if before then @root else null
