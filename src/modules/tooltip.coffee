@@ -49,17 +49,19 @@ class Tooltip
   show: (reference) ->
     @range = @quill.getSelection()
     [left, top] = this._position(reference)
-    [left, top] = this._limit(left, top)
-    left += @quill.root.ownerDocument.defaultView.window.pageXOffset
-    top += @quill.root.ownerDocument.defaultView.window.pageYOffset
+    # [left, top] = this._limit(left, top)
+    # left += @quill.root.ownerDocument.defaultView.window.pageXOffset
+    # top += @quill.root.ownerDocument.defaultView.window.pageYOffset
     @container.style.left = "#{left}px"
     @container.style.top = "#{top}px"
     @container.focus()
 
   _getBounds: ->
     bounds = @quill.root.getBoundingClientRect()
-    scrollX = @quill.root.ownerDocument.defaultView.window.pageXOffset
-    scrollY = @quill.root.ownerDocument.defaultView.window.pageYOffset
+    scrollX = 0
+    scrollY = 0
+    # scrollX = @quill.root.ownerDocument.defaultView.window.pageXOffset
+    # scrollY = @quill.root.ownerDocument.defaultView.window.pageYOffset
     return {
       left:   bounds.left + scrollX
       right:  bounds.right + scrollX
@@ -83,10 +85,12 @@ class Tooltip
     editorRect = this._getBounds()
     if reference?
       referenceBounds = reference.getBoundingClientRect()
-      left = referenceBounds.left + referenceBounds.width/2 - toolbarRect.width/2
-      top = referenceBounds.top + referenceBounds.height + @options.offset
-      if top + toolbarRect.height > editorRect.bottom
-        top = referenceBounds.top - toolbarRect.height - @options.offset
+      left = referenceBounds.left + referenceBounds.width / 2 - editorRect.left
+      top = referenceBounds.top + referenceBounds.height / 2 - editorRect.top + this.options.offset;
+      # left = referenceBounds.left + referenceBounds.width/2 - toolbarRect.width/2
+      # top = referenceBounds.top + referenceBounds.height + @options.offset
+      # if top + toolbarRect.height > editorRect.bottom
+      #   top = referenceBounds.top - toolbarRect.height - @options.offset
     else
       left = editorRect.left + editorRect.width/2 - toolbarRect.width/2
       top = editorRect.top + editorRect.height/2 - toolbarRect.height/2
