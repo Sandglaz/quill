@@ -13,6 +13,7 @@ class Tooltip
         'top': '0px'
         'white-space': 'nowrap'
         'z-index': '2000'
+        'opacity': '100'
       '.tooltip a':
         'cursor': 'pointer'
         'text-decoration': 'none'

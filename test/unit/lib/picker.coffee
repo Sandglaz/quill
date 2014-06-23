@@ -1,6 +1,6 @@
 describe('Picker', ->
   beforeEach( ->
-    @interaction = if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch then 'touchend' else 'click'
+    @interaction = if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch then 'tap' else 'click'
     @container = $('#editor-container').html(Quill.Normalizer.stripWhitespace('
       <select title="Font" class="ql-font">
         <option value="sans-serif" selected>Sans Serif</option>

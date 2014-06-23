@@ -1,6 +1,6 @@
 describe('Toolbar', ->
   beforeEach( ->
-    @interaction = if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch then 'touchend' else 'click'
+    @interaction = if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch then 'tap' else 'click'
     @editorContainer = $('#editor-container').html('
       <div>
         <p>

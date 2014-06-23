@@ -24,12 +24,12 @@ class Picker
 
     touch = (("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch)
     if touch
-      DOM.addEventListener(@select.ownerDocument, 'touchend', =>
+      DOM.addEventListener(@select.ownerDocument, 'tap', =>
         this.close()
         return true
       )
 
-      DOM.addEventListener(@label, 'touchend', =>
+      DOM.addEventListener(@label, 'tap', =>
         _.defer( =>
           DOM.toggleClass(@container, 'ql-expanded')
         )

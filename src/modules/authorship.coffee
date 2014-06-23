@@ -47,7 +47,7 @@ class Authorship
       this.enable(DOM.hasClass(button, 'ql-on'))
     )
     if touch
-      DOM.addEventListener(button, 'touchend', =>
+      DOM.addEventListener(button, 'tap', =>
         DOM.toggleClass(button, 'ql-on')
         this.enable(DOM.hasClass(button, 'ql-on'))
       )

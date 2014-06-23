@@ -54,7 +54,7 @@ class Toolbar
       eventName = 'change'
     else
       if ("ontouchstart" of window) or window.DocumentTouch and document instanceof DocumentTouch
-        eventName = 'touchend'
+        eventName = 'tap'
       else
         eventName = 'click'
     input = @container.querySelector(selector)
@@ -65,12 +65,13 @@ class Toolbar
       @preventUpdate = true
       @quill.focus()
       range = @quill.getSelection()
+      console.log range
       callback(range, value) if range?
       @preventUpdate = false
       return true
-    if eventName == 'touchend' || eventName == 'click'
-      #bind on both touchend and click since OSX chrome reports itself as touch
-      DOM.addEventListener(input, 'touchend', toolbar_interaction_callback)
+    if eventName == 'tap' || eventName == 'click'
+      #bind on both tap and click since OSX chrome reports itself as touch
+      DOM.addEventListener(input, 'tap', toolbar_interaction_callback)
       DOM.addEventListener(input, 'click', toolbar_interaction_callback)
     else
       DOM.addEventListener(input, eventName, toolbar_interaction_callback)
