@@ -65,13 +65,12 @@ class Toolbar
       @preventUpdate = true
       @quill.focus()
       range = @quill.getSelection()
-      console.log range
       callback(range, value) if range?
       @preventUpdate = false
       return true
     if eventName == 'tap' || eventName == 'click'
       #bind on both tap and click since OSX chrome reports itself as touch
-      DOM.addEventListener(input, 'tap', toolbar_interaction_callback)
+      DOM.addEventListener(input, 'touchend', toolbar_interaction_callback)
       DOM.addEventListener(input, 'click', toolbar_interaction_callback)
     else
       DOM.addEventListener(input, eventName, toolbar_interaction_callback)

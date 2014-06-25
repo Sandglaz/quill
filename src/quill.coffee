@@ -170,7 +170,13 @@ class Quill extends EventEmitter2
     if format.isType(Format.types.LINE)
       this.formatLine(range, name, value, Quill.sources.USER)
     else
-      format.prepare(value)
+      #this fixes applying formatting freezing iOS safari when applied mid word that is being autocompleted
+      delta = Tandem.Delta.makeInsertDelta(@getLength(), range.end, 's');
+      @editor.applyDelta(delta, 'user');
+      _.defer =>
+        delete_delta = Tandem.Delta.makeDeleteDelta(@getLength(), range.end, 1);
+        @editor.applyDelta(delete_delta, 'user');
+        format.prepare(value)
 
   setContents: (delta, source = Quill.sources.API) ->
     if _.isArray(delta)

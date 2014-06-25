@@ -67,8 +67,8 @@ class ImageTooltip extends Tooltip
     DOM.addEventListener(@container.querySelector('.insert'), 'click', _.bind(this.insertImage, this))
     DOM.addEventListener(@container.querySelector('.cancel'), 'click', _.bind(this.hide, this))
     if touch
-      DOM.addEventListener(@container.querySelector('.insert'), 'tap', _.bind(this.insertImage, this))
-      DOM.addEventListener(@container.querySelector('.cancel'), 'tap', _.bind(this.hide, this))
+      DOM.addEventListener(@container.querySelector('.insert'), 'touchend', _.bind(this.insertImage, this))
+      DOM.addEventListener(@container.querySelector('.cancel'), 'touchend', _.bind(this.hide, this))
 
     DOM.addEventListener(@textbox, 'input', _.bind(this._preview, this))
     this.initTextbox(@textbox, this.insertImage, this.hide)
