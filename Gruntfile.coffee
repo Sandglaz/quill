@@ -6,44 +6,6 @@ module.exports = (grunt) ->
 
   grunt.initConfig(
     pkg: grunt.file.readJSON('package.json')
-
-    modernizr: {
-      dist: {
-        "devFile" : "node_modules/grunt-modernizr/lib/modernizr-dev.js",
-
-        "outputFile" : "build/modernizr-custom.js",
-
-        "extra" : {
-            "shiv" : true,
-            "printshiv" : false,
-            "load" : true,
-            "mq" : false,
-            "cssclasses" : true
-        },
-
-        "extensibility" : {
-            "addtest" : false,
-            "prefixed" : false,
-            "teststyles" : false,
-            "testprops" : false,
-            "testallprops" : false,
-            "hasevents" : false,
-            "prefixes" : false,
-            "domprefixes" : false
-        },
-
-        "uglify" : true,
-
-        "tests" : [],
-
-        "parseFiles" : true,
-
-        "matchCommunityTests" : false,
-
-        "customTests" : []
-      }
-
-    },
   )
 
   require('./grunt/build')(grunt)
@@ -54,8 +16,6 @@ module.exports = (grunt) ->
   grunt.registerTask('default', ['build'])
 
   grunt.registerTask('build', ['clean', 'browserify:quill', 'browserify:tandem', 'uglify', 'concat', 'coffee:all', 'jade', 'stylus'])
-
-  grunt.initConfig
 
   # TODO is there a better way to do this...
   grunt.registerTask('dev', 'All the tasks for Quill development', ->
@@ -74,4 +34,3 @@ module.exports = (grunt) ->
   grunt.registerTask('test:unit:remote', ['karma:remote-mac', 'karma:remote-windows', 'karma:remote-linux', 'karma:remote-mobile', 'karma:remote-legacy'])
 
   grunt.registerTask('test:coverage', ['coffee:src', 'shell:instrument', 'browserify:quill', 'karma:coverage', 'clean:coffee', 'clean:coverage', 'browserify:quill'])
-  grunt.task.loadNpmTasks('grunt-modernizr');
