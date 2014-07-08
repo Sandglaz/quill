@@ -50,7 +50,7 @@ class Tooltip
   show: (reference) ->
     @range = @quill.getSelection()
     [left, top] = this._position(reference)
-    # [left, top] = this._limit(left, top)
+    [left, top] = this._limit(left, top)
     # left += @quill.root.ownerDocument.defaultView.window.pageXOffset
     # top += @quill.root.ownerDocument.defaultView.window.pageYOffset
     @container.style.left = "#{left}px"
@@ -76,9 +76,9 @@ class Tooltip
     editorRect = this._getBounds()
     toolbarRect = @container.getBoundingClientRect()
     left = Math.min(editorRect.right - toolbarRect.width, left)   # right boundary
-    left = Math.max(editorRect.left, left)                        # left boundary
+    left = Math.max(0, left)                        # left boundary
     top = Math.min(editorRect.bottom - toolbarRect.height, top)   # bottom boundary
-    top = Math.max(editorRect.top, top)                           # top boundary
+    top = Math.max(0, top)                           # top boundary
     return [left, top]
 
   _position: (reference) ->

@@ -87,7 +87,7 @@ class SnowTheme extends DefaultTheme
     @quill.on(@quill.constructor.events.SELECTION_CHANGE, (range) =>
       _.invoke(@pickers, 'close') if range?
     )
-    DOM.addClass(@quill.root.ownerDocument.body, 'snow')
+    DOM.addClass(@quill.root, 'snow')
     @quill.onModuleLoad('multi-cursor', _.bind(this.extendMultiCursor, this))
     @quill.onModuleLoad('toolbar', _.bind(this.extendToolbar, this))
 
