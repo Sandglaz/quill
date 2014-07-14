@@ -39,15 +39,15 @@ describe('Tooltip', ->
     it('place below', ->
       reference = makeBounder(100, 100, 100, 50)
       [left, top] = @tooltip._position(reference)
-      expect(left).toEqual(50)
-      expect(top).toEqual(170)
+      expect(left).toEqual(100)
+      expect(top).toEqual(95)
     )
 
     it('place above', ->
       reference = makeBounder(100, 500, 100, 50)
       [left, top] = @tooltip._position(reference)
-      expect(left).toEqual(50)
-      expect(top).toEqual(380)
+      expect(left).toEqual(100)
+      expect(top).toEqual(495)
     )
   )
 )
