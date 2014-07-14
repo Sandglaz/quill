@@ -5,7 +5,7 @@ Normalizer = require('../normalizer')
 
 class Tooltip
   @DEFAULTS:
-    offset: 10
+    offset: 45
     styles:
       '.tooltip':
         'background-color': '#fff'
