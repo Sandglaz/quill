@@ -14,7 +14,6 @@ Modules =
   Keyboard      : require('./modules/keyboard')
   LinkTooltip   : require('./modules/link-tooltip')
   MultiCursor   : require('./modules/multi-cursor')
-  PasteManager  : require('./modules/paste-manager')
   Toolbar       : require('./modules/toolbar')
   UndoManager   : require('./modules/undo-manager')
 
@@ -34,7 +33,6 @@ class Quill extends EventEmitter2
     formats: ['align', 'bold', 'italic', 'strike', 'underline', 'color', 'background', 'font', 'size', 'link', 'image', 'bullet', 'list']
     modules:
       'keyboard': true
-      'paste-manager': true
       'undo-manager': true
     pollInterval: 100
     readOnly: false
