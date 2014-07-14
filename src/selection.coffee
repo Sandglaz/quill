@@ -61,7 +61,7 @@ class Selection
 
   update: (source) ->
     range = this.getRange()
-    emit = source != 'silent' and !Range.compare(range, @range)
+    emit = source == 'checkUpdate' or source != 'silent' and !Range.compare(range, @range)
     # If range changes to null, require two update cycles to update and emit
     if range == null and source =='user' and !@nullDelay
       @nullDelay = true

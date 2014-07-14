@@ -53,7 +53,7 @@ class Editor
       oldDelta = @delta
       @delta = oldDelta.compose(delta)
       @quill.emit(@quill.constructor.events.TEXT_CHANGE, delta, source)
-    source = 'silent' if delta
+      source = 'checkUpdate'
     @selection.update(source)
 
   getDelta: ->
