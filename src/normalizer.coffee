@@ -119,7 +119,7 @@ Normalizer =
 
   stripAttributes: (node) ->
     _.each node.children, (child) ->
-      _.each ['id', 'class', 'style'], (attribute) ->
+      _.each ['id', 'class', 'style', 'contenteditable'], (attribute) ->
         child.removeAttribute(attribute)
 
       Normalizer.stripAttributes(child)
