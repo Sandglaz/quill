@@ -1,8 +1,6 @@
 _            = require('lodash')
-ColorPicker  = require('../../lib/color-picker')
 DefaultTheme = require('../default')
 DOM          = require('../../dom')
-Picker       = require('../../lib/picker')
 
 
 class SnowTheme extends DefaultTheme
@@ -83,10 +81,6 @@ class SnowTheme extends DefaultTheme
   constructor: (@quill) ->
     super
     @quill.addStyles(SnowTheme.STYLES)
-    @pickers = []
-    @quill.on(@quill.constructor.events.SELECTION_CHANGE, (range) =>
-      _.invoke(@pickers, 'close') if range?
-    )
     DOM.addClass(@quill.root, 'snow')
     @quill.onModuleLoad('multi-cursor', _.bind(this.extendMultiCursor, this))
     @quill.onModuleLoad('toolbar', _.bind(this.extendToolbar, this))
@@ -102,15 +96,6 @@ class SnowTheme extends DefaultTheme
     _.each(['color', 'background', 'font', 'size', 'align'], (format) =>
       select = module.container.querySelector(".ql-#{format}")
       return unless select?
-      switch format
-        when 'font', 'size', 'align'
-          picker = new Picker(select)
-        when 'color', 'background'
-          picker = new ColorPicker(select)
-          _.each(picker.container.querySelectorAll('.ql-picker-item'), (item, i) ->
-            DOM.addClass(item, 'ql-primary-color') if i < 7
-          )
-      @pickers.push(picker) if picker?
     )
     _.each(DOM.getTextNodes(module.container), (node) ->
       if DOM.getText(node).trim().length == 0

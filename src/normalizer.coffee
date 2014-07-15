@@ -117,6 +117,13 @@ Normalizer =
     html = html.replace(/\>\s+\</g, '><')
     return html
 
+  stripAttributes: (node) ->
+    _.each node.children, (child) ->
+      _.each ['id', 'class', 'style'], (attribute) ->
+        child.removeAttribute(attribute)
+
+      Normalizer.stripAttributes(child)
+
   whitelistStyles: (node) ->
     original = DOM.getStyles(node)
     styles = _.omit(original, (value, key) ->

@@ -334,12 +334,12 @@ describe('Document', ->
           { value: '0123', attributes: { bold: true } }
           { value: '\n' }
         ]})
-      'style format':
-        initial:  ['<p><span style="color: teal;">0123</span></p>']
-        expected: Tandem.Delta.makeDelta({ startLength: 0, ops: [
-          { value: '0123', attributes: { color: 'teal' } }
-          { value: '\n' }
-        ]})
+      # 'style format':
+      #   initial:  ['<p><span style="color: teal;">0123</span></p>']
+      #   expected: Tandem.Delta.makeDelta({ startLength: 0, ops: [
+      #     { value: '0123', attributes: { color: 'teal' } }
+      #     { value: '\n' }
+      #   ]})
       'bullets':
         initial:  ['<ul><li>One</li><li>Two</li></ul>']
         expected: Tandem.Delta.makeDelta({ startLength: 0, ops: [

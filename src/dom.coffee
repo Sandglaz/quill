@@ -273,7 +273,7 @@ DOM =
     newNode = node.ownerDocument.createElement(newTag)
     attributes = DOM.getAttributes(node)
     this.moveChildren(newNode, node) unless DOM.VOID_TAGS[newTag]?
-    node.parentNode.replaceChild(newNode, node)
+    node.parentNode?.replaceChild(newNode, node)
     _.each(attributes, (value, name) ->
       newNode.setAttribute(name, value)
     )

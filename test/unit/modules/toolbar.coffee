@@ -52,27 +52,27 @@ describe('Toolbar', ->
       expect(Quill.DOM.hasClass(@button, 'ql-active')).toBe(true)
     )
 
-    it('dropdown', ->
-      @quill.setSelection(7, 7)
-      expect(Quill.DOM.getSelectValue(@select)).toEqual('18px')
-    )
+    # it('dropdown', ->
+    #   @quill.setSelection(7, 7)
+    #   expect(Quill.DOM.getSelectValue(@select)).toEqual('18px')
+    # )
 
-    it('dropdown change', ->
-      @quill.setSelection(7, 7)
-      @quill.setSelection(9, 9)
-      expect(Quill.DOM.getSelectValue(@select)).toEqual('32px')
-    )
+    # it('dropdown change', ->
+    #   @quill.setSelection(7, 7)
+    #   @quill.setSelection(9, 9)
+    #   expect(Quill.DOM.getSelectValue(@select)).toEqual('32px')
+    # )
 
-    it('dropdown reset', ->
-      @quill.setSelection(7, 7)
-      @quill.setSelection(3, 3)
-      expect(Quill.DOM.getSelectValue(@select)).toEqual('13px')
-    )
+    # it('dropdown reset', ->
+    #   @quill.setSelection(7, 7)
+    #   @quill.setSelection(3, 3)
+    #   expect(Quill.DOM.getSelectValue(@select)).toEqual('13px')
+    # )
 
-    it('dropdown blank', ->
-      @quill.setSelection(5, 7)
-      expect(Quill.DOM.getSelectValue(@select)).toEqual('')
-    )
+    # it('dropdown blank', ->
+    #   @quill.setSelection(5, 7)
+    #   expect(Quill.DOM.getSelectValue(@select)).toEqual('')
+    # )
   )
 
   describe('_getActive()', ->
@@ -87,10 +87,10 @@ describe('Toolbar', ->
         range: [2, 4], expected: {}
       'overlapping formats':
         range: [1, 3], expected: {}
-      'select format':
-        range: [7, 7], expected: { size: '18px' }
-      'overlapping select formats':
-        range: [5, 7], expected: { size: ['18px'] }
+      # 'select format':
+      #   range: [7, 7], expected: { size: '18px' }
+      # 'overlapping select formats':
+      #   range: [5, 7], expected: { size: ['18px'] }
 
     _.each(tests, (test, name) ->
       it(name, ->

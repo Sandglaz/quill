@@ -72,6 +72,7 @@ class Document
     )
 
   rebuild: ->
+    Normalizer.stripAttributes(@root)
     lines = @lines.toArray()
     lineNode = @root.firstChild
     lineNode = lineNode.firstChild if lineNode? and DOM.LIST_TAGS[lineNode.tagName]?

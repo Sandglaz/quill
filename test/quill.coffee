@@ -13,9 +13,7 @@ Quill.Utils      = require('../src/utils')
 
 Quill.Lib =
   EventEmitter2 : require('eventemitter2').EventEmitter2
-  ColorPicker   : require('../src/lib/color-picker')
   LinkedList    : require('../src/lib/linked-list')
-  Picker        : require('../src/lib/picker')
   Range         : require('../src/lib/range')
 
 Quill.Module =

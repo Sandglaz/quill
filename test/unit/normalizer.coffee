@@ -190,6 +190,21 @@ describe('Normalizer', ->
     )
   )
 
+  describe('stripAttributes()', ->
+    tests =
+      'remove class, id and style attributes from child elements':
+        initial:  '<span class="custom"><span id="span-1234" style="color:red;">Test</span></span>'
+        expected: '<span><span>Test</span></span>'
+
+    _.each(tests, (test, name) ->
+      it(name, ->
+        @container.innerHTML = test.initial
+        lineNode = Quill.Normalizer.stripAttributes(@container)
+        expect(@container).toEqualHTML(test.expected)
+      )
+    )
+  )
+
   describe('whitelistStyles()', ->
     tests =
       'no styles':
