@@ -70,6 +70,7 @@ class LinkTooltip extends Tooltip
     this.setMode(url, false)
 
   setMode: (url, edit = false) ->
+    DOM.toggleClass(@container, 'editing', edit)
     if edit
       @textbox.value = url
       @textbox.focus()
@@ -80,7 +81,6 @@ class LinkTooltip extends Tooltip
       @link.href = url
       text = if url.length > @options.maxLength then url.slice(0, @options.maxLength) + '...' else url
       DOM.setText(@link, text)
-    DOM.toggleClass(@container, 'editing', edit)
 
   _findAnchor: (range) ->
     [leaf, offset] = @quill.editor.doc.findLeafAt(range.start, true)
