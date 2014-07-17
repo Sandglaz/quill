@@ -93,9 +93,9 @@ class LinkTooltip extends Tooltip
   _onToolbar: (range, value) ->
     return unless range and !range.isCollapsed()
     if value
-      this.setMode(this._suggestURL(range), true)
       nativeRange = @quill.editor.selection._getNativeRange()
       this.show(nativeRange)
+      this.setMode(this._suggestURL(range), true)
     else
       @quill.formatText(range, 'link', false, 'user')
 
