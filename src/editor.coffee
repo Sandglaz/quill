@@ -14,7 +14,7 @@ class Editor
     @doc = new Document(@root, @options)
     @delta = @doc.toDelta()
     @selection = new Selection(@doc, @renderer.editor_container, @quill)
-    @timer = setInterval(_.bind(this.checkUpdate, this), @options.pollInterval)
+    @timer = setTimeout(_.bind(this.checkUpdate, this), @options.pollInterval)
     @quill.on(@quill.constructor.events.SELECTION_CHANGE, (range) =>
       @savedRange = range
     )
@@ -47,14 +47,17 @@ class Editor
       @quill.emit(@quill.constructor.events.TEXT_CHANGE, localDelta, 'user')
 
   checkUpdate: (source = 'user') ->
-    return clearInterval(@timer) if !@renderer.editor_container.parentNode? or !@root.parentNode?
+    clearTimeout(@timer)
+    return  if !@renderer.editor_container.parentNode? or !@root.parentNode?
     delta = this._update()
     if delta
       oldDelta = @delta
       @delta = oldDelta.compose(delta)
       @quill.emit(@quill.constructor.events.TEXT_CHANGE, delta, source)
       source = 'checkUpdate'
-    @selection.update(source)
+    result = @selection.update(source)
+    @timer = setTimeout(_.bind(this.checkUpdate, this), @options.pollInterval)
+    return result
 
   getDelta: ->
     return @delta
